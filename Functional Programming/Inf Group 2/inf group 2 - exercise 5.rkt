@@ -201,3 +201,15 @@
   (cond ((null? l) l)
         ((member? (cdr l) (car l)) (remove-duplicates (cdr l)))
         (else (cons (car l) (remove-duplicates (cdr l))))))
+
+
+; Task 9:
+
+(define (chunk l n)
+  (define (helper l res cnt)
+    (cond ((null? l) (reverse res))
+          ((= (modulo cnt n) 0) (list (reverse (cons (car l) res)) (helper (cdr l) '() (+ cnt 1))))
+          (else (helper (cdr l) (cons (car l) res) (+ cnt 1)))))
+
+  (helper l '() 1))
+   
